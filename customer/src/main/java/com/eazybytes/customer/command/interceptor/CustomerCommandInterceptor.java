@@ -37,7 +37,7 @@ public class CustomerCommandInterceptor implements MessageDispatchInterceptor<Co
 
       } else if (UpdateCustomerCommand.class.equals(message.getPayloadType())) {
         /// Cast the message to CreateCustomerCommand.
-        CreateCustomerCommand command = (CreateCustomerCommand) message.getPayload();
+        UpdateCustomerCommand command = (UpdateCustomerCommand) message.getPayload();
         /// Validation the command.
         Customer customer = customerRepository.findByMobileNumberAndActiveSw(command.getMobileNumber(), true).orElse(null);
         if (customer == null) {

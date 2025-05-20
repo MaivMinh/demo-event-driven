@@ -6,12 +6,14 @@ import com.eazybytes.customer.command.event.CustomerUpdatedEvent;
 import com.eazybytes.customer.entity.Customer;
 import com.eazybytes.customer.service.ICustomerService;
 import lombok.RequiredArgsConstructor;
+import org.axonframework.config.ProcessingGroup;
 import org.axonframework.eventhandling.EventHandler;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
+@ProcessingGroup("customer-group")
 public class CustomerProjection {
   private final ICustomerService customerService;
 
@@ -30,7 +32,7 @@ public class CustomerProjection {
   @EventHandler
   public void on(CustomerUpdatedEvent event) {
     /// Cập nhật dữ liệu vào trong Read Database.
-    customerService.updateCustomer(event);
+    throw new RuntimeException("It's a bad day!");
   }
 
   @EventHandler
